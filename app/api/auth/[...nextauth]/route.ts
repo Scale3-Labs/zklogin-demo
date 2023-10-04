@@ -1,6 +1,32 @@
 import { authOptions } from "@/lib/auth";
+import { getActiveNetworkSuiClient } from "@/lib/sui";
+import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
+import { generateNonce, generateRandomness } from "@mysten/zklogin";
+import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
+import { generators } from "openid-client";
 
-const handler = NextAuth(authOptions);
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const suiClient = await getActiveNetworkSuiClient();
+  const { epoch } = await suiClient.getLatestSuiSystemState();
+
+  const maxEpoch = epoch + 2; // this means the ephemeral key will be active for 2 epochs from now.
+  const ephemeralKeyPair = new Ed25519Keypair();
+  const randomness = generateRandomness();
+  const nonce = generateNonce(
+    ephemeralKeyPair.getPublicKey(),
+    // @ts-ignore
+    maxEpoch,
+    randomness
+  );
+
+  console.log("nonce:", nonce.toString());
+
+  generators.nonce = () => {
+    return nonce.toString();
+  };
+
+  return NextAuth(req, res, authOptions);
+}
 
 export { handler as GET, handler as POST };
