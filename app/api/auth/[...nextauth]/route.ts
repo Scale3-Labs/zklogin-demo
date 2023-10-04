@@ -20,10 +20,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     randomness
   );
 
-  console.log("nonce:", nonce.toString());
-
   generators.nonce = () => {
-    return nonce.toString();
+    return nonce;
   };
 
   return NextAuth(req, res, authOptions);

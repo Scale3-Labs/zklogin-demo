@@ -2,11 +2,6 @@ import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { generators } from "openid-client";
-
-generators.nonce = () => {
-  return "secret";
-};
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -19,13 +14,11 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           prompt: "select_account",
-          nonce: "secret",
           scope: "openid email profile",
         },
       },
     }),
   ],
-  debug: true,
 };
 
 export function getSession() {
