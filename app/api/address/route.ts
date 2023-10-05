@@ -2,12 +2,14 @@ import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { deriveUserSalt } from "@/lib/salt";
 import { jwtToAddress } from "@mysten/zklogin";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get("email") as string;
   const session = await getServerSession(authOptions);
+  console.log(session);
+  console.log(email);
 
   // If the user is not authenticated, return an error
   if (!session) {
