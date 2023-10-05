@@ -95,23 +95,38 @@ export default async function Home() {
           <>
             {" "}
             <h1
-              className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]"
+              className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-3xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm [text-wrap:balance] md:text-6xl md:leading-[5rem]"
               style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
             >
-              Sui zkLogin for your next project
+              Open source zkLogin primitives for your next project
             </h1>
             <p
               className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 [text-wrap:balance] md:text-xl"
               style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
             >
-              A set of authentication primitives to bootstrap your next project.
-              Built on top of{" "}
+              A demo application to showcase zkLogin authentication.
+            </p>
+            <p
+              className="animate-fade-up text-center text-gray-500 opacity-0 [text-wrap:balance] md:text-md mt-2"
+              style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
+            >
+              Powered by{" "}
               <a
                 href="https://docs.sui.io/testnet/build/zk_login"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="underline"
               >
                 Sui zkLogin
+              </a>{" "}
+              and built by{" "}
+              <a
+                href="https://scale3labs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Scale3.
               </a>
             </p>
           </>

@@ -4,6 +4,7 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
+import { Google } from "./icons";
 import Scale3 from "./icons/scale3.svg";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
@@ -38,10 +39,11 @@ export default function NavBar({ session }: { session: Session | null }) {
               <UserDropdown session={session} />
             ) : (
               <button
-                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                className="flex gap-2 items-center rounded-full border border-gray-300 p-1.5 px-4 text-sm transition-all bg-gradient-to-tr from-blue-400 via-white to-purple-400 background-animate"
                 onClick={() => setShowSignInModal(true)}
               >
-                Sign In
+                <Google className="h-1 w-1" />
+                Get Started
               </button>
             )}
           </div>
