@@ -2,11 +2,11 @@ import { authOptions } from "@/lib/auth";
 import { getActiveNetworkSuiClient } from "@/lib/sui";
 import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
 import { generateNonce, generateRandomness } from "@mysten/zklogin";
-import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 import { generators } from "openid-client";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextRequest, res: NextResponse) {
   const suiClient = await getActiveNetworkSuiClient();
   const { epoch } = await suiClient.getLatestSuiSystemState();
 
@@ -24,6 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return nonce;
   };
 
+  // @ts-ignore
   return NextAuth(req, res, authOptions);
 }
 
