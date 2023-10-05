@@ -9,6 +9,22 @@ import { jwtToAddress } from "@mysten/zklogin";
 import { getServerSession } from "next-auth/next";
 
 export default async function Home() {
+  const { stargazers_count: stars } = await fetch(
+    "https://api.github.com/repos/Scale3-Labs/zklogin-demo",
+    {
+      ...(process.env.GITHUB_OAUTH_TOKEN && {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }),
+      // data will revalidate every 24 hours
+      next: { revalidate: 86400 },
+    }
+  )
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+
   const session = await getServerSession(authOptions);
 
   // if the user is logged in, fetch their address
@@ -137,14 +153,14 @@ export default async function Home() {
         >
           <a
             className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
-            href="https://github.com/steven-tey/precedent"
+            href="https://github.com/Scale3-Labs/zklogin-demo"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Github />
             <p>
               <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
-              <span className="font-semibold">{nFormatter(10)}</span>
+              <span className="font-semibold">{nFormatter(stars)}</span>
             </p>
           </a>
         </div>
