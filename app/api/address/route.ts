@@ -8,8 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get("email") as string;
   const session = await getServerSession(authOptions);
-  console.log(session);
-  console.log(email);
 
   // If the user is not authenticated, return an error
   if (!session) {
