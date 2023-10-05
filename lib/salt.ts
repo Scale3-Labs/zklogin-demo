@@ -2,7 +2,7 @@ import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
 // Static master seed value - store this securely and do not expose or change it!
-const MASTER_SEED = "TESTSEED";
+const MASTER_SEED = process.env.MASTER_SEED as string;
 
 interface DecodedToken {
   iss: string;
