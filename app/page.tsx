@@ -19,7 +19,7 @@ export default async function Home() {
         },
       }),
       // data will revalidate every 24 hours
-      next: { revalidate: 86400 },
+      // next: { revalidate: 86400 },
     }
   )
     .then((res) => res.json())
